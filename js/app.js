@@ -1,53 +1,56 @@
-const htmlTag = document.querySelector("html");
-const changeThemeBtn = document.querySelector(".theme-btn");
-const jsCourseElem = document.querySelector(".product-img.javascript");
-const reactCourseElem = document.querySelector(".product-img.reactjs");
-const nextCourseElem = document.querySelector(".product-img.nextjs");
+const body = document.querySelector('html');
+const jsImgElement = document.querySelector('.js')
+const reactImgElement = document.querySelector('.react-js')
+const nextImgElement = document.querySelector('.next-js')
+const changeThemeBtn = document.querySelector('button')
 
-let theme = "light";
+
+let theme = "light"
+
+
 
 function changeTheme() {
-  changeThemeBtn.innerHTML = "";
+  localStorage.setItem('theme', theme)
 
-  if (theme === "light") {
-    theme = "dark";
-    localStorage.setItem("theme", "dark");
-    changeThemeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  if(theme === "light") {
+    theme = 'dark'
+    localStorage.setItem('theme', 'dark')
   } else {
-    theme = "light";
-    localStorage.setItem("theme", "light");
-    changeThemeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    theme = 'light'
+    localStorage.setItem('theme', 'light')
   }
 
-  setTheme();
+  setTheme()
 }
 
 function detectTheme() {
-  const localTheme = localStorage.getItem("theme");
-
-  if (localTheme) {
-    theme = localTheme;
+  const currentTheme = localStorage.getItem('theme')
+  
+  if(currentTheme) {
+    theme = currentTheme;
   }
 
-  setTheme();
+  setTheme()
 }
+
 
 function setTheme() {
-  changeThemeBtn.innerHTML = "";
-
-  if (theme === "light") {
-    htmlTag.classList.remove("dark");
-    jsCourseElem.setAttribute("src", "./public/images/light-js.png");
-    reactCourseElem.setAttribute("src", "./public/images/light-reactjs.png");
-    nextCourseElem.setAttribute("src", "./public/images/light-nextjs.png");
-    changeThemeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+  if(theme === "light") {
+    body.classList.remove('dark')
+    body.classList.add('light')
+    jsImgElement.src = "images/light-js.png"
+    reactImgElement.src = "images/light-reactjs.png"
+    nextImgElement.src = "images/light-nextjs.png"
   } else {
-    htmlTag.classList.add("dark");
-    jsCourseElem.setAttribute("src", "./public/images/dark-js.png");
-    reactCourseElem.setAttribute("src", "./public/images/dark-reactjs.png");
-    nextCourseElem.setAttribute("src", "./public/images/dark-nextjs.png");
-    changeThemeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    body.classList.remove('light')
+    body.classList.add('dark')
+    jsImgElement.src = "images/dark-js.png"
+    reactImgElement.src = "images/dark-reactjs.png"
+    nextImgElement.src = "images/dark-nextjs.png"
   }
 }
 
-changeThemeBtn.addEventListener("click", changeTheme);
+
+
+
+changeThemeBtn.addEventListener('click', changeTheme);
